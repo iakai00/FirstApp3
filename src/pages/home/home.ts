@@ -12,9 +12,12 @@ export class HomePage {
   mediaApi: string = ' http://media.mw.metropolia.fi/wbma/';
   mediaArray: Media [] = [];
 
-  constructor(private http: HttpClient, public navCtrl: NavController) {
-
-  }
+  constructor
+  (
+    private http: HttpClient,
+    public navCtrl: NavController
+  )
+  {}
 
   ngOnInit() {
     this.getImagesFromServer();
