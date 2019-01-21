@@ -9,5 +9,11 @@ export interface Media {
   mime_type: string;
   time_added: string;
   screenshot?: string;
-  thumbnails?: object;
+  thumbnails?: Thumbnail;
+}
+
+export interface Thumbnail {
+  160: string;
+  320?: string;
+  640?: string;
 }

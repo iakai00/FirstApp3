@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { MediaProvider } from '../../providers/media/media';
 import { Media } from '../../interfaces/pic';
-import { HttpClient } from '@angular/common/http';
-import { Pic } from '../../../../firstApp-httpClient-B/src/interfaces/pic';
 
 @Component({
   selector: 'page-home',
@@ -10,35 +9,43 @@ import { Pic } from '../../../../firstApp-httpClient-B/src/interfaces/pic';
 })
 export class HomePage {
 
-  mediaApi: string = ' http://media.mw.metropolia.fi/wbma/';
-  mediaArray: Media [] = [];
-  configUrl = 'https://media.mw.metropolia.fi/wbma';
+  mediaArray: Media[] = [];
 
-  constructor
-  (
-    private http: HttpClient,
-    public navCtrl: NavController
-  )
-  {}
+  constructor(
+    private mediaProvider: MediaProvider, public navCtrl: NavController) {
 
-  getData() {
-    return this.http.get<Pic[]>(this.configUrl + '/media');
   }
 
-  ngOnInit() {
-    this.getImagesFromServer();
+  ionViewDidLoad() {
+    this.getAllFiles();
   }
 
+  getAllFiles() {
+    /*this.mediaProvider.getAllMedia().subscribe((result: Media[]) => {
+        this.mediaArray = result.map((pic: Media) => {
+          // add thumbnails property to pic
 
-  getImagesFromServer() {
-    this.http.get<Media[]>(this.mediaApi + 'media').subscribe(
-      (result: Media[]) => {
-        this.mediaArray = result;
-      },
-      (error) => {
-        console.log(error);
+          const nameArray = pic.filename.split('.')[0];
+
+          pic.thumbnails = {
+            160: nameArray + '-tn160.png',
+          };
+          console.log('pic.thumbnails', pic);
+          return pic;
+
+        });
+      }*/
+    this.mediaProvider.getAllMedia().subscribe((result: Media[]) => {
+
+        result.forEach((pic: Media) => {
+          this.mediaProvider.getSingleMedia(pic.file_id).
+            subscribe((file: Media) => {
+              this.mediaArray.push(file);
+            });
+        });
+      }, (err) => {
+        console.log(err);
       },
     );
-
   }
 }
