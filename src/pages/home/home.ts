@@ -21,26 +21,13 @@ export class HomePage {
   }
 
   getAllFiles() {
-    /*this.mediaProvider.getAllMedia().subscribe((result: Media[]) => {
-        this.mediaArray = result.map((pic: Media) => {
-          // add thumbnails property to pic
-
-          const nameArray = pic.filename.split('.')[0];
-
-          pic.thumbnails = {
-            160: nameArray + '-tn160.png',
-          };
-          console.log('pic.thumbnails', pic);
-          return pic;
-
-        });
-      }*/
     this.mediaProvider.getAllMedia().subscribe((result: Media[]) => {
 
         result.forEach((pic: Media) => {
           this.mediaProvider.getSingleMedia(pic.file_id).
             subscribe((file: Media) => {
               this.mediaArray.push(file);
+              console.log(file);
             });
         });
       }, (err) => {
@@ -48,4 +35,5 @@ export class HomePage {
       },
     );
   }
+
 }
