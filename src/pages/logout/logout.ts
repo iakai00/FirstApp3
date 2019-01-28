@@ -24,6 +24,8 @@ export class LogoutPage {
 
   logout() {
     this.navCtrl.setRoot(LoginRegisterPage);
+    //this.navCtrl.push(LoginRegisterPage);
+
   }
 
 }

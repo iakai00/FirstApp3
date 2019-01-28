@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
 import { LoginResponse, RegisterResponse, User } from '../../interfaces/user';
 import { HomePage } from '../home/home';
+import { MenuPage } from '../menu/menu';
 
 /**
  * Generated class for the LoginRegisterPage page.
@@ -35,7 +36,7 @@ export class LoginRegisterPage {
         this.mediaProvider.loggedIn = true;
         localStorage.setItem('token', response.token);
         localStorage.setItem('userId', response.user.user_id.toString());
-        this.navCtrl.push(HomePage);
+        this.navCtrl.push(MenuPage);
       },
       error => {
         console.log(error);
@@ -51,7 +52,7 @@ export class LoginRegisterPage {
     this.mediaProvider.register(this.user).subscribe(
       (response: RegisterResponse) => {
         this.mediaProvider.loggedIn = true;
-        this.navCtrl.push(HomePage);
+        this.navCtrl.push(MenuPage);
         console.log(response);
 
       },

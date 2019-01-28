@@ -10,7 +10,7 @@ import { LoginRegisterPage } from '../pages/login-register/login-register';
   templateUrl: 'app.html',
 })
 export class MyApp {
-  rootPage: any = MenuPage;
+  rootPage: any = LoginRegisterPage;
 
   constructor(
     platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
