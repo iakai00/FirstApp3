@@ -4,6 +4,7 @@ import { MediaProvider } from '../../providers/media/media';
 import { LoginResponse, RegisterResponse, User } from '../../interfaces/user';
 import { HomePage } from '../home/home';
 import { MenuPage } from '../menu/menu';
+import { RegisterPage } from '../register/register';
 
 /**
  * Generated class for the LoginRegisterPage page.
@@ -17,6 +18,7 @@ import { MenuPage } from '../menu/menu';
   templateUrl: 'login-register.html',
 })
 export class LoginRegisterPage {
+  // @ts-ignore
   user: User = { username: null };
 
   constructor(
@@ -42,22 +44,13 @@ export class LoginRegisterPage {
         console.log(error);
       });
   }
-
   checkUsers() {
     this.mediaProvider.checkUsers(this.user);
 
   }
 
-  register() {
-    this.mediaProvider.register(this.user).subscribe(
-      (response: RegisterResponse) => {
-        this.mediaProvider.loggedIn = true;
-        this.navCtrl.push(MenuPage);
-        console.log(response);
+  registerTo() {
 
-      },
-    );
-
-  }
-
+        this.navCtrl.push(RegisterPage);
+      };
 }

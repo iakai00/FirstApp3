@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
 import { HomePage} from '../home/home';
+import { RegisterResponse, User } from '../../interfaces/user';
+import { MenuPage } from '../menu/menu';
 
 /**
  * Generated class for the RegisterPage page.
@@ -16,6 +18,8 @@ import { HomePage} from '../home/home';
 })
 export class RegisterPage {
 
+  // @ts-ignore
+  user: User = { username: null };
   userCreated = false;
   registerDetails ={ email: '', username: '', password: '' };
 
@@ -26,7 +30,7 @@ export class RegisterPage {
     console.log('ionViewDidLoad RegisterPage');
   }
 
-  register(){
+  /**register(){
     this.mediaProvider.register(this.registerDetails).subscribe(success => {
         console.log(success);
         this.userCreated = true;
@@ -34,6 +38,17 @@ export class RegisterPage {
       error => {
         console.log(error);
       });
-  }
+  }**/
 
+  register() {
+    this.mediaProvider.register(this.user).subscribe(
+      (response: RegisterResponse) => {
+        this.mediaProvider.loggedIn = true;
+        this.navCtrl.push(MenuPage);
+        console.log(response);
+
+      },
+    );
+
+  }
 }

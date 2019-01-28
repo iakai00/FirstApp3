@@ -13,10 +13,13 @@ import { MediaProvider } from '../providers/media/media';
 import { MenuPage } from '../pages/menu/menu';
 import { LoginRegisterPage } from '../pages/login-register/login-register';
 import { LogoutPage } from '../pages/logout/logout';
+import { RegisterPage } from '../pages/register/register';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
     MyApp,
+    RegisterPage,
     HomePage,
     MenuPage,
     LoginRegisterPage,
@@ -26,10 +29,12 @@ import { LogoutPage } from '../pages/logout/logout';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    RegisterPage,
     HomePage,
     MenuPage,
     LoginRegisterPage,

@@ -1,3 +1,4 @@
+
 export interface User {
   user_id?: number;
   username: string;
@@ -16,5 +17,6 @@ export interface LoginResponse {
 export interface RegisterResponse {
   message: string;
   user_id: number;
+  user: User;
 
 }
