@@ -13,7 +13,8 @@ export interface LoginResponse {
   user: User;
 }
 
-export interface Success {
+export interface RegisterResponse {
   message: string;
-  token: string;
+  user_id: number;
+
 }

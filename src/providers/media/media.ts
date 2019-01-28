@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Media } from '../../interfaces/pic';
-import { LoginResponse, User } from '../../interfaces/user';
+import { LoginResponse, RegisterResponse, User } from '../../interfaces/user';
 
 /*
   Generated class for the MediaProvider provider.
@@ -38,14 +38,19 @@ export class MediaProvider {
       httpOptions);
   }
 
-  register(userCreated: User){
+  register(userData: User) {
     const httpOptions = {
       headers: new HttpHeaders({
           'Content-type': 'application/json',
         },
       ),
     };
-    return this.http.post<LoginResponse>(this.mediaApi + 'login', userCreated,
-      httpOptions);  }
+    return this.http.post<RegisterResponse>(this.mediaApi + 'users',
+      userData, httpOptions);
+  }
+
+  checkUsers(username) {
+    return this.http.get(this.mediaApi + 'users/username/' + username);
+  }
 
 }
