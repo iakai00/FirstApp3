@@ -12,3 +12,8 @@ export interface LoginResponse {
   token: string;
   user: User;
 }
+
+export interface Success {
+  message: string;
+  token: string;
+}

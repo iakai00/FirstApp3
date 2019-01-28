@@ -37,4 +37,15 @@ export class MediaProvider {
     return this.http.post<LoginResponse>(this.mediaApi + 'login', user,
       httpOptions);
   }
+
+  register(userCreated: User){
+    const httpOptions = {
+      headers: new HttpHeaders({
+          'Content-type': 'application/json',
+        },
+      ),
+    };
+    return this.http.post<LoginResponse>(this.mediaApi + 'login', userCreated,
+      httpOptions);  }
+
 }
