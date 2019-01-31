@@ -30,16 +30,6 @@ export class RegisterPage {
     console.log('ionViewDidLoad RegisterPage');
   }
 
-  /**register(){
-    this.mediaProvider.register(this.registerDetails).subscribe(success => {
-        console.log(success);
-        this.userCreated = true;
-      },
-      error => {
-        console.log(error);
-      });
-  }**/
-
   register() {
     this.mediaProvider.register(this.user).subscribe(
       (response: RegisterResponse) => {

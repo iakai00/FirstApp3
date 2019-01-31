@@ -13,7 +13,12 @@ export class MediaProvider {
 
   mediaApi = ' http://media.mw.metropolia.fi/wbma/';
 
+  mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/';
+
+
   loggedIn = false;
+
+  user: User = null;
 
   constructor(public http: HttpClient) {
     console.log('Hello MediaProvider Provider');
@@ -25,6 +30,16 @@ export class MediaProvider {
 
   getSingleMedia(id) {
     return this.http.get<Media>(this.mediaApi + 'media/' + id);
+  }
+
+  getFilesByTag(tag){
+    return this.http.get<Media[]>(this.mediaApi + 'tags/' + tag);
+  }
+  getUserName(username){
+    return this.http.get<Media>(this.mediaApi + 'media/' + username);
+  }
+  getEmail(email){
+    return this.http.get<Media>(this.mediaApi + 'media/' + email);
   }
 
   login(user: User) {
@@ -51,6 +66,17 @@ export class MediaProvider {
 
   checkUsers(username) {
     return this.http.get(this.mediaApi + 'users/username/' + username);
+  }
+
+  profile(user: User) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+          'Content-type': 'application/json',
+        },
+      ),
+    };
+    return this.http.post<User>(this.mediaApi + 'profile', user,
+      httpOptions);
   }
 
 }

@@ -5,6 +5,7 @@ import { LoginResponse, RegisterResponse, User } from '../../interfaces/user';
 import { HomePage } from '../home/home';
 import { MenuPage } from '../menu/menu';
 import { RegisterPage } from '../register/register';
+import { ProfilePage } from '../Profile/profile';
 
 /**
  * Generated class for the LoginRegisterPage page.
@@ -44,13 +45,26 @@ export class LoginRegisterPage {
         console.log(error);
       });
   }
+
   checkUsers() {
     this.mediaProvider.checkUsers(this.user);
 
   }
 
+  /*profile() {
+    this.mediaProvider.login(this.user).subscribe(
+      (response: LoginResponse) => {
+        console.log(response);
+        this.mediaProvider.loggedIn = true;
+        this.navCtrl.push(ProfilePage);
+      },
+      error => {
+        console.log(error);
+      });
+  }*/
+
   registerTo() {
 
-        this.navCtrl.push(RegisterPage);
-      };
+    this.navCtrl.push(RegisterPage);
+  };
 }

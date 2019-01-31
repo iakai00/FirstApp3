@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { LoginRegisterPage } from '../login-register/login-register';
-import { LogoutPage } from '../logout/logout';
+import { ProfilePage } from '../Profile/profile';
 import { MediaProvider } from '../../providers/media/media';
+import { RegisterPage } from '../register/register';
+import { User } from '../../interfaces/user';
 
 /**
  * Generated class for the MenuPage page.
@@ -20,7 +22,8 @@ export class MenuPage {
 
   homepage = HomePage;
   loginRegister = LoginRegisterPage;
-  logout = LogoutPage;
+  register = RegisterPage;
+  profile: ProfilePage;
 
   constructor(
     public navCtrl: NavController, public navParams: NavParams,
