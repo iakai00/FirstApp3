@@ -7,6 +7,8 @@ export interface User {
   full_name?: string;
   time_created?: Date;
   avatar?: string;
+  confirmPassword?: string;
+
 
 }
 
@@ -21,5 +23,10 @@ export interface RegisterResponse {
   user_id: number;
   user: User;
 
+}
+
+export interface CheckUserResponse {
+  username: string;
+  available: boolean;
 }
 

@@ -59,7 +59,7 @@ export class LoginRegisterPage {
 
 
   checkUsers() {
-    this.mediaProvider.checkUsers(this.user);
+    this.mediaProvider.checkUser(this.user);
 
   }
   registerTo() {

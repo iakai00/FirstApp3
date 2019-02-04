@@ -9,23 +9,23 @@
 
 <ion-content padding>
 
-  <form (ngSubmit)="register()" [formGroup]="myForm">
+  <form #registerForm="ngForm" class="register-form" (ngSubmit)="register()">
     <ion-item>
-      <ion-label floating>Username</ion-label>
-      <ion-input type="text" [(ngModel)]="user.username" formControlName="username"></ion-input>
+      <ion-label id="username" floating color="secondary">Username</ion-label>
+      <ion-input type="text" [(ngModel)]="user.username" name="username" (ionBlur)="checkUser()" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password" [(ngModel)]="user.password" formControlName="password"></ion-input>
+      <ion-label id="password" floating color="secondary">Password</ion-label>
+      <ion-input type="password" [(ngModel)]="user.password" name="password" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Full name</ion-label>
-      <ion-input type="text" [(ngModel)]="user.full_name" formControlName="name"></ion-input>
+      <ion-label id="confirmPassword" floating color="secondary">confirm password</ion-label>
+      <ion-input type="password" [(ngModel)]="user.confirmPassword" name="confirmPassword" (ionBlur)="confirmPassword()" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Email</ion-label>
-      <ion-input type="email" [(ngModel)]="user.email" formControlName="email"></ion-input>
+      <ion-label id="email" floating color="secondary">Email</ion-label>
+      <ion-input type="email" [(ngModel)]="user.email" name="email" required></ion-input>
     </ion-item>
-    <button ion-button block color="primary" type="submit">Register</button>
+    <button ion-button block class="register-btn" color="primary" type="submit" [disabled]="!registerForm.form.valid">Register</button>
   </form>
 </ion-content>

@@ -1,7 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Media } from '../../interfaces/pic';
-import { LoginResponse, RegisterResponse, User } from '../../interfaces/user';
+import {
+  CheckUserResponse,
+  LoginResponse,
+  RegisterResponse,
+  User,
+} from '../../interfaces/user';
 import { Avatar } from '../../interfaces/media';
 
 /*
@@ -69,6 +74,17 @@ export class MediaProvider {
       userData, httpOptions);
   }
 
+  upload(data: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+          'x-access-token': localStorage.getItem('token'),
+        },
+      ),
+    };
+    return this.http.post<LoginResponse>(this.mediaApi + 'media', data,
+      httpOptions);
+  }
+
   checkUsers(username) {
     return this.http.get(this.mediaApi + 'users/username/' + username);
   }
@@ -82,6 +98,10 @@ export class MediaProvider {
     };
     return this.http.post<User>(this.mediaApi + 'profile', user,
       httpOptions);
+  }
+
+  checkUser(username) {
+    return this.http.get<CheckUserResponse>(this.mediaApi + 'users/username/' + username);
   }
 
 }
