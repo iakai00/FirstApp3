@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Media } from '../../interfaces/pic';
 import { LoginResponse, RegisterResponse, User } from '../../interfaces/user';
+import { Avatar } from '../../interfaces/media';
 
 /*
   Generated class for the MediaProvider provider.
@@ -30,6 +31,10 @@ export class MediaProvider {
 
   getSingleMedia(id) {
     return this.http.get<Media>(this.mediaApi + 'media/' + id);
+  }
+
+  getAvatar() {
+    return this.http.get<Avatar[]>(this.mediaApi + 'tags/profile');
   }
 
   getFilesByTag(tag){

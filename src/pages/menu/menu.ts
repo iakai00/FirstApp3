@@ -23,14 +23,26 @@ export class MenuPage {
   homepage = HomePage;
   loginRegister = LoginRegisterPage;
   register = RegisterPage;
-  profile: ProfilePage;
+  profile = ProfilePage;
 
   constructor(
-    public navCtrl: NavController, public navParams: NavParams,
-    public mediaProvider: MediaProvider) {
-  }
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public mediaProvider: MediaProvider
+  ) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MenuPage');
+    this.checkIfUserLoggedIn();
+  }
+
+  checkIfUserLoggedIn() {
+    const token = localStorage.getItem('token');
+    if (token === null) {
+      this.mediaProvider.loggedIn = false;
+      this.navCtrl.push(LoginRegisterPage).catch(e => console.log(e));
+    } else {
+      this.mediaProvider.loggedIn = true;
+    }
   }
 }

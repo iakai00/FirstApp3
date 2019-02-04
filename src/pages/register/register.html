@@ -9,22 +9,22 @@
 
 <ion-content padding>
 
-  <form (ngSubmit)="register()">
+  <form (ngSubmit)="register()" [formGroup]="myForm">
     <ion-item>
       <ion-label floating>Username</ion-label>
-      <ion-input type="text" [(ngModel)]="user.username" name="username"></ion-input>
+      <ion-input type="text" [(ngModel)]="user.username" formControlName="username"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Password</ion-label>
-      <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
+      <ion-input type="password" [(ngModel)]="user.password" formControlName="password"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Full name</ion-label>
-      <ion-input type="text" [(ngModel)]="user.full_name" name="name"></ion-input>
+      <ion-input type="text" [(ngModel)]="user.full_name" formControlName="name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Email</ion-label>
-      <ion-input type="email" [(ngModel)]="user.email" name="email"></ion-input>
+      <ion-input type="email" [(ngModel)]="user.email" formControlName="email"></ion-input>
     </ion-item>
     <button ion-button block color="primary" type="submit">Register</button>
   </form>

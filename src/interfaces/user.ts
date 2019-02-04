@@ -6,6 +6,8 @@ export interface User {
   email?: string;
   full_name?: string;
   time_created?: Date;
+  avatar?: string;
+
 }
 
 export interface LoginResponse {
@@ -20,3 +22,4 @@ export interface RegisterResponse {
   user: User;
 
 }
+
