@@ -3,12 +3,14 @@ import { NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
 import { HomePage} from '../home/home';
 import {
-  CheckUserResponse,
+  CheckUserResponse, LoginResponse,
   RegisterResponse,
   User,
 } from '../../interfaces/user';
 import { MenuPage } from '../menu/menu';
 import { AlertController} from 'ionic-angular';
+import { LoginRegisterPage } from '../login-register/login-register';
+import { Avatar } from '../../interfaces/media';
 
 /**
  * Generated class for the RegisterPage page.
@@ -45,18 +47,54 @@ export class RegisterPage {
     console.log('ionViewDidLoad RegisterPage');
   }
 
+  /*register() {
+    this.mediaProvider.register(this.user).subscribe(
+      (data: RegisterResponse) => {
+        this.login();
+        this.form.reset();
+      }, error => {
+        console.log(error);
+        this.showAlert(error.error.message);
+      },
+    );*/
 
   register() {
     this.mediaProvider.register(this.user).subscribe(
       (response: RegisterResponse) => {
-        this.mediaProvider.loggedIn = true;
-        this.navCtrl.push(MenuPage);
+        this.login();
+        //this.mediaProvider.loggedIn = true;
+        //this.navCtrl.push(MenuPage);
         console.log(response);
 
       },
     );
 
   }
+
+  login() {
+    this.mediaProvider.login(this.user).subscribe(
+      (response: LoginResponse) => {
+        console.log(response);
+        this.mediaProvider.loggedIn = true;
+        localStorage.setItem('token', response.token);
+        this.mediaProvider.getAvatar().subscribe(
+          (avatars: Avatar[]) => {
+            const myAvatar = avatars.filter((avatar: Avatar) => avatar.user_id === response.user.user_id);
+            console.log('myavatar', myAvatar);
+            if (myAvatar.length > 0) {
+              response.user['avatar'] = myAvatar[0].filename;
+            }
+            localStorage.setItem('userData', JSON.stringify(response.user));
+            //this.navCtrl.pop().catch(e => console.log(e));
+            this.navCtrl.push(MenuPage);
+          }
+        )
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
   checkUser() {
     this.mediaProvider.checkUser(this.user.username).subscribe(
       (response: CheckUserResponse) => {
