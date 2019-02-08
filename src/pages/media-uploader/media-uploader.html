@@ -14,23 +14,29 @@
 
 <ion-content padding>
 
-  <form (submit)="upload()">
+  <form #uploadForm = "ngForm" class="upload-form" (submit)="upload()">
 
     <ion-item>
-      <ion-input type="text" name="title" [(ngModel)]="title" placeholder="Text"></ion-input>
+      <ion-input type="text" name="title" [(ngModel)]="title" placeholder="Text" minlength="5" required></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-input type="text" name="description" [(ngModel)]="description" placeholder="Description Example"></ion-input>
     </ion-item>
 
+
+
     <ion-item>
-      <ion-input type="file" (change)="handleChange($event)" placeholder="Choose Media Files"></ion-input>
+      <button type="button" (click)="uploadData()"  accept="image/*, video/*, audio/*">Choose</button>
     </ion-item>
+    <!--<ion-item>
+      <ion-input type="file" (change)="handleChange($event)" placeholder="Choose Media Files" accept="image/*, video/*, audio/*"  required></ion-input>
+    </ion-item>-->
 
-    <button class="submit-btn" ion-button full type="submit" color="primary">Upload</button>
-
-
+    <button class="submit-btn" ion-button full type="submit" color="primary" [disabled]="!uploadForm.form.valid">Upload</button>
+    <button class="reset-btn" style="width: 50%" ion-button block type="button"  (click)="reset()" color="primary" >Reset</button>
+    <button class="submit-btn" ion-button full type="button" style="width: 50%" (click)="takePicture()">Take a Pic</button>
+    <p align="center"><img src="{{ myImage }}" /></p>
   </form>
 
   <ion-card *ngIf="file">

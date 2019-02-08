@@ -16,6 +16,7 @@ import { ProfilePage } from '../pages/Profile/profile';
 import { RegisterPage } from '../pages/register/register';
 import { PipesModule } from '../pipes/pipes.module';
 import { MediaUploaderPage } from '../pages/media-uploader/media-uploader';
+import { Chooser } from '@ionic-native/chooser';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { MediaUploaderPage } from '../pages/media-uploader/media-uploader';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    PipesModule
+    PipesModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -48,6 +49,7 @@ import { MediaUploaderPage } from '../pages/media-uploader/media-uploader';
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     MediaProvider,
+    Chooser,
   ],
 })
 export class AppModule {
