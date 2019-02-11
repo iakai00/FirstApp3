@@ -79,7 +79,9 @@ export class MediaUploaderPage {
     const fd = new FormData();
     fd.append('title', this.title);
     fd.append('description', description + filters);
-    fd.append('file', this.file);
+    //fd.append('file', this.file);
+
+    fd.append('file', this.myImage);
     this.mediaProvider.upload(fd).subscribe(resp => {
 
       // setTimeout 2 secs
@@ -96,6 +98,7 @@ export class MediaUploaderPage {
   reset() {
     this.myForm.reset();
     this.fileData = null;
+    this.file = null;
   }
 
   uploadData() {
@@ -123,5 +126,13 @@ export class MediaUploaderPage {
         console.log(err);
       }
     );
+  }
+  choosePicture() {
+    this.chooser.getFile('image/*, video/*, audio/*').then(file => {
+      console.log(file ? file.name : 'canceled');
+      console.log(file);
+      this.myBlob = new Blob([file.data], { type: file.mediaType });
+
+    }).catch((error: any) => console.error(error));
   }
 }

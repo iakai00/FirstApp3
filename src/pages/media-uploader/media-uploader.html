@@ -14,30 +14,33 @@
 
 <ion-content padding>
 
-  <form #uploadForm = "ngForm" class="upload-form" (submit)="upload()">
+  <form (submit)="upload()" #uploadForm="ngForm">
 
     <ion-item>
-      <ion-input type="text" name="title" [(ngModel)]="title" placeholder="Text" minlength="5" required></ion-input>
+      <ion-input type="text" name="title" [(ngModel)]="title" placeholder="Text" minlength="2" required></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" name="description" [(ngModel)]="description" placeholder="Description Example"></ion-input>
+      <ion-input type="text" name="description" [(ngModel)]="description" placeholder="Description Example" minlength="10"></ion-input>
     </ion-item>
 
+    <!-- <ion-item>
+      <ion-input type="file" (change)="handleChange($event)" placeholder="Choose Media Files" accept="image/*, video/*, audio/*"></ion-input>
+    </ion-item> -->
+
+    <button class="myBtn" ion-button full type="button" (click)="takePicture()">Take a Pic</button>
+
+    <button class="myBtn" style="width: 50%" ion-button full type="button" (click)="choosePicture()"  accept="image/*, video/*, audio/*">Choose From Gallery</button>
+
+    <button class="myBtn" style="width: 50%" ion-button full type="submit" color="primary" [disabled]="!uploadForm.form.valid">Upload</button>
+
+    <button class="myBtn" ion-button full type="button" color="secondary" (click)="reset()"> Reset</button>
 
 
-    <ion-item>
-      <button type="button" (click)="uploadData()"  accept="image/*, video/*, audio/*">Choose</button>
-    </ion-item>
-    <!--<ion-item>
-      <ion-input type="file" (change)="handleChange($event)" placeholder="Choose Media Files" accept="image/*, video/*, audio/*"  required></ion-input>
-    </ion-item>-->
-
-    <button class="submit-btn" ion-button full type="submit" color="primary" [disabled]="!uploadForm.form.valid">Upload</button>
-    <button class="reset-btn" style="width: 50%" ion-button block type="button"  (click)="reset()" color="primary" >Reset</button>
-    <button class="submit-btn" ion-button full type="button" style="width: 50%" (click)="takePicture()">Take a Pic</button>
-    <p align="center"><img src="{{ myImage }}" /></p>
   </form>
+
+  <p align="center"><img src="{{ myImage }}" /></p>
+
 
   <ion-card *ngIf="file">
     <img #preview [src]="fileData"
@@ -70,4 +73,5 @@
       </ion-item>
     </div>
   </ion-card>
+
 </ion-content>
