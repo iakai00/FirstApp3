@@ -1,13 +1,17 @@
 page-media-uploader {
 
   .myBtn {
-    background: lightblue;
     border-radius: 30px !important;
     border: 1px solid #ffffff;
   }
 
   input:invalid {
     border: 1px solid #ff0c6b;
+  }
+  .myBtnC, .myBtnU{
+    border-radius: 30px !important;
+    display: inline-block;
+    text-align: center;
   }
 
 
