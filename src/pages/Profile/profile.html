@@ -14,7 +14,7 @@
 
 <ion-content padding>
   <div class="profile-image">
-    <img class="profile-image" [src]=" 'http://media.mw.metropolia.fi/wbma/uploads/' + ( user.avatar || ' ' )" alt="profile image">
+    <img class="profile-image" [src]=" 'http://media.mw.metropolia.fi/wbma/uploads/' + ( user.avatar || 'ab6e8a71b39981a6422125f476d40005-tn160.png' )" alt="profile image">
   </div>
   <div class="profile-details">
     <h2>{{ (user.full_name || 'Unkown') }}</h2>
@@ -22,6 +22,7 @@
     <p>joined: {{ user.time_created | date: 'dd.MM.yy'}}</p>
   </div>
   <ion-row>
-    <button ion-button block class="logout-btn" color="primary" (click)="logout()">Logout</button>
+    <button ion-button block class="my-btn" color="primary" (click)="toMyFilesPage()">My Files</button>
+    <button ion-button block class="my-btn" color="primary" (click)="logout()">Logout</button>
   </ion-row>
 </ion-content>

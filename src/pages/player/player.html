@@ -1,0 +1,45 @@
+<!--
+  Generated template for the PlayerPage page.
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>player</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="media-container" *ngIf="media">
+    <img class="media" *ngIf="media.mime_type.includes('image')"
+         [src]=" 'http://media.mw.metropolia.fi/wbma/uploads/'+ media.filename "
+         [ngStyle]="{'filter': 'brightness('+filters.brightness/100+') contrast('+filters.contrast/100+') saturate('+filters.saturation/100+') sepia('+filters.warmth/100+')'} ">
+    <video class="media" *ngIf="media.mime_type.includes('video')" preload="auto" controls>
+      <source [src]=" 'http://media.mw.metropolia.fi/wbma/uploads/'+ media.filename ">
+    </video>
+    <audio class="media" *ngIf="media.mime_type.includes('audio')" preload="auto" controls>
+      <source [src]=" 'http://media.mw.metropolia.fi/wbma/uploads/'+ media.filename ">
+    </audio>
+    <div class="media-details">
+      <div>
+        <svg (click)="likeMedia()" stroke="#ef3232" stroke-width="2" title="SVG Heart Icon" viewBox="-11 -11 122 111"
+             width="32" height="32">
+          <path id="likeButton" d="
+               M 50 0,
+               A 1 1 0 1 0 0 50,
+               L50,100,
+               L100,50,
+               A 1 1 0 1 0 50 0" fill="#ffffff" />
+        </svg>
+        <p>{{ likes }} likes</p>
+      </div>
+      <h6>{{ media.title }}</h6>
+      <p><strong>@{{ user.username }}</strong></p>
+      <p>{{ mediaDescribtion }}</p>
+      <p><span style="color: #0000008a"> {{ media.time_added | date: 'dd.MM.yy'}}</span></p>
+    </div>
+  </div>
+</ion-content>

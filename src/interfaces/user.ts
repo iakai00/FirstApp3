@@ -1,15 +1,12 @@
-
 export interface User {
   user_id?: number;
-  username: string;
+  username?: string;
   password?: string;
+  confirmPassword?: string;
   email?: string;
   full_name?: string;
   time_created?: Date;
   avatar?: string;
-  confirmPassword?: string;
-
-
 }
 
 export interface LoginResponse {
@@ -21,7 +18,6 @@ export interface LoginResponse {
 export interface RegisterResponse {
   message: string;
   user_id: number;
-  user: User;
 
 }
 
@@ -30,3 +26,9 @@ export interface CheckUserResponse {
   available: boolean;
 }
 
+export interface UserInfo {
+  full_name?: string;
+  user_id?: number;
+  username?: string;
+  avatar?: string;
+}

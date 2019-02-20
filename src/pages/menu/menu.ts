@@ -7,6 +7,7 @@ import { MediaProvider } from '../../providers/media/media';
 import { RegisterPage } from '../register/register';
 import { User } from '../../interfaces/user';
 import { MediaUploaderPage } from '../media-uploader/media-uploader';
+import { UploadPage } from '../upload/upload';
 
 /**
  * Generated class for the MenuPage page.
@@ -25,7 +26,7 @@ export class MenuPage {
   loginRegister = LoginRegisterPage;
   register = RegisterPage;
   profile = ProfilePage;
-  upload = MediaUploaderPage;
+  upload = UploadPage;
 
   constructor(
     public navCtrl: NavController,

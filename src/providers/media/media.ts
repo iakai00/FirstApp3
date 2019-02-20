@@ -1,13 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Media } from '../../interfaces/pic';
-import {
-  CheckUserResponse,
-  LoginResponse,
-  RegisterResponse,
-  User,
-} from '../../interfaces/user';
-import { Avatar } from '../../interfaces/media';
+import { Avatar, Favourite, Media, UploadResponse } from '../../interfaces/media';
+import { CheckUserResponse, LoginResponse, RegisterResponse, User, UserInfo } from '../../interfaces/user';
 
 /*
   Generated class for the MediaProvider provider.
@@ -17,39 +11,23 @@ import { Avatar } from '../../interfaces/media';
 @Injectable()
 export class MediaProvider {
 
-  mediaApi = ' http://media.mw.metropolia.fi/wbma/';
-
-  mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/';
-
-
+  mediaAPI = 'http://media.mw.metropolia.fi/wbma/';
   loggedIn = false;
-
-  user: User = null;
 
   constructor(public http: HttpClient) {
     console.log('Hello MediaProvider Provider');
   }
 
   getAllMedia() {
-    return this.http.get<Media[]>(this.mediaApi + 'media');
+    return this.http.get<Media[]>(this.mediaAPI + 'media');
   }
 
   getSingleMedia(id) {
-    return this.http.get<Media>(this.mediaApi + 'media/' + id);
+    return this.http.get<Media>(this.mediaAPI + 'media/' + id);
   }
 
   getAvatar() {
-    return this.http.get<Avatar[]>(this.mediaApi + 'tags/profile');
-  }
-
-  getFilesByTag(tag){
-    return this.http.get<Media[]>(this.mediaApi + 'tags/' + tag);
-  }
-  getUserName(username){
-    return this.http.get<Media>(this.mediaApi + 'media/' + username);
-  }
-  getEmail(email){
-    return this.http.get<Media>(this.mediaApi + 'media/' + email);
+    return this.http.get<Avatar[]>(this.mediaAPI + 'tags/profile');
   }
 
   login(user: User) {
@@ -59,49 +37,104 @@ export class MediaProvider {
         },
       ),
     };
-    return this.http.post<LoginResponse>(this.mediaApi + 'login', user,
+    return this.http.post<LoginResponse>(this.mediaAPI + 'login', user,
       httpOptions);
   }
 
   register(userData: User) {
+    userData.confirmPassword = undefined;
     const httpOptions = {
       headers: new HttpHeaders({
           'Content-type': 'application/json',
         },
       ),
     };
-    return this.http.post<RegisterResponse>(this.mediaApi + 'users',
+    return this.http.post<RegisterResponse>(this.mediaAPI + 'users',
       userData, httpOptions);
   }
 
-  upload(data: any) {
+  checkUser(username) {
+    return this.http.get<CheckUserResponse>(this.mediaAPI + 'users/username/' + username);
+  }
+
+  logout() {
+    this.loggedIn = false;
+  }
+
+  uploadMedia(data: any) {
     const httpOptions = {
       headers: new HttpHeaders({
           'x-access-token': localStorage.getItem('token'),
         },
       ),
     };
-    return this.http.post<LoginResponse>(this.mediaApi + 'media', data,
-      httpOptions);
+    return this.http.post<UploadResponse>(this.mediaAPI + 'media', data, httpOptions);
   }
 
-  checkUsers(username) {
-    return this.http.get(this.mediaApi + 'users/username/' + username);
+  getFavouriteById(id) {
+    return this.http.get<Favourite[]>(this.mediaAPI + 'favourites/file/' + id);
   }
 
-  profile(user: User) {
+  createFavourite(id) {
     const httpOptions = {
       headers: new HttpHeaders({
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'x-access-token': localStorage.getItem('token'),
+        },
+      ),
+    };
+    return this.http.post(this.mediaAPI + 'favourites', 'file_id=' + id, httpOptions);
+  }
+
+  deleteFavourite(id) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+          'x-access-token': localStorage.getItem('token'),
+        },
+      ),
+    };
+    return this.http.delete(this.mediaAPI + 'favourites/file/' + id, httpOptions);
+  }
+
+  getUser(id: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+          'x-access-token': localStorage.getItem('token'),
+        },
+      ),
+    };
+    return this.http.get<UserInfo>(this.mediaAPI + 'users/' + id, httpOptions);
+  }
+
+  getUserFiles(id: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+          'x-access-token': localStorage.getItem('token'),
+        },
+      ),
+    };
+    return this.http.get<Media[]>(this.mediaAPI + 'media/user/' + id, httpOptions);
+  }
+
+  updateSingleMedia(data: any, id) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+          'x-access-token': localStorage.getItem('token'),
           'Content-type': 'application/json',
         },
       ),
     };
-    return this.http.post<User>(this.mediaApi + 'profile', user,
-      httpOptions);
+    return this.http.put(this.mediaAPI + 'media/' + id, data, httpOptions);
   }
 
-  checkUser(username) {
-    return this.http.get<CheckUserResponse>(this.mediaApi + 'users/username/' + username);
+  deleteSingleMedia(id) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+          'x-access-token': localStorage.getItem('token'),
+          'Content-type': 'application/json',
+        },
+      ),
+    };
+    return this.http.delete(this.mediaAPI + 'media/' + id, httpOptions);
   }
-
 }

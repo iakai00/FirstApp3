@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MenuPage } from '../menu/menu';
-// @ts-ignore
-import { User } from '../../interface/user';
-import { LoginRegisterPage } from '../login-register/login-register';
+import { User } from '../../interfaces/user';
+import { MediaProvider } from '../../providers/media/media';
+import { MyFilesPage } from '../my-files/my-files';
 
 /**
  * Generated class for the LogoutPage page.
@@ -18,9 +18,9 @@ import { LoginRegisterPage } from '../login-register/login-register';
 })
 export class ProfilePage {
 
-  user: User = { username: null , avatar: null };
+  user: User = { };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider) {
   }
 
   ionViewDidLoad() {
@@ -31,12 +31,16 @@ export class ProfilePage {
   showUserInfo() {
     const userData = JSON.parse(localStorage.getItem('userData'));
     for (const k in userData) this.user[k] = userData[k];
-    console.log('show user ifno', this.user);
   }
 
   logout() {
     localStorage.removeItem('token');
-    this.navCtrl.setRoot(LoginRegisterPage).catch(e => console.log(e));
+    this.mediaProvider.loggedIn = false;
+    this.navCtrl.setRoot(MenuPage).catch(e => console.log(e));
+  }
+
+  toMyFilesPage() {
+    this.navCtrl.push(MyFilesPage).catch(e => console.log(e));
   }
 
 }

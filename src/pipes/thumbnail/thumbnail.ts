@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { MediaProvider } from '../../providers/media/media';
-import { Media } from '../../interfaces/pic';
+import { Media } from '../../interfaces/media';
 
 /**
  * Generated class for the ThumbnailPipe pipe.

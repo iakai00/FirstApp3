@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
-import { Media } from '../../interfaces/pic';
+import { Media } from '../../interfaces/media';
 import { Observable } from 'rxjs';
 
 @Component({

@@ -1,0 +1,69 @@
+<!--
+  Generated template for the UpdateMediaPage page.
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>updateMedia</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form class="my-form" (submit)="updateMedia()" #uploadForm="ngForm">
+    <ion-item no-lines>
+      <ion-label>Update Media</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Title</ion-label>
+      <ion-input type="text" name="title" placeholder="fiel title" [(ngModel)]="title" minlength="2" #myTitle="ngModel"></ion-input>
+    </ion-item>
+    <ion-item no-lines class="text-md-danger" *ngIf="myTitle.errors && (myTitle.dirty || myTitle.touched)">
+      <small *ngIf="myTitle.errors.minlength">Title must be at least 2 charachters</small>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>description</ion-label>
+      <ion-textarea name="description" placeholder="file description" [(ngModel)]="description" minlength="5" #myDescription="ngModel"></ion-textarea>
+    </ion-item>
+    <ion-item no-lines class="text-md-danger" *ngIf="myDescription.errors && (myDescription.dirty || myDescription.touched)">
+      <small *ngIf="myDescription.errors.minlength">Description must be at least 5 charachters</small>
+    </ion-item>
+    <button type="submit" ion-button block class="my-btn" color="primary"  [disabled]="!(uploadForm.form.valid)">Upload</button>
+    <!-- </ion-buttons> -->
+  </form>
+
+  <ion-card *ngIf="file" class="my-card">
+    <img #preview [src]="fileData" [ngStyle]="{'filter': 'brightness('+filters.brightness/100+') contrast('+filters.contrast/100+') saturate('+filters.saturation/100+') sepia('+filters.warmth/100+')'} ">
+    <div *ngIf="file.mime_type.includes('image')">
+      <ion-item>
+        <ion-range min="0" max="200" [(ngModel)]="filters.brightness">
+          <ion-icon range-left name="sunny" color="primary"></ion-icon>
+          <ion-icon range-right name="sunny" color="primary"></ion-icon>
+        </ion-range>
+      </ion-item>
+
+      <ion-item>
+        <ion-range min="0" max="200" color="dark" [(ngModel)]="filters.contrast">
+          <ion-icon range-left name="contrast"></ion-icon>
+          <ion-icon range-right name="contrast"></ion-icon>
+        </ion-range>
+      </ion-item>
+      <ion-item>
+        <ion-range min="0" max="200" color="secondary" [(ngModel)]="filters.saturation">
+          <ion-icon range-left name="water" color="secondary"></ion-icon>
+          <ion-icon range-right name="water" color="secondary"></ion-icon>
+        </ion-range>
+      </ion-item>
+      <ion-item>
+        <ion-range min="0" max="100" step="10" snaps color="danger" [(ngModel)]="filters.warmth">
+          <ion-icon range-left name="thermometer" color="danger"></ion-icon>
+          <ion-icon range-right name="thermometer" color="danger"></ion-icon>
+        </ion-range>
+      </ion-item>
+    </div>
+  </ion-card>
+</ion-content>

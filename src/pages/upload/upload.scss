@@ -1,0 +1,29 @@
+page-upload {
+
+}
+.input-cover{
+  display: none;
+}
+
+.upload-form {
+  margin: 0 auto;
+}
+.my-btn {
+  margin: 30px auto;
+}
+.my-card {
+  margin: 0 auto;
+}
+@media (min-width: 767px) {
+  .my-btn {
+    max-width: 240px;
+  }
+
+  .upload-form{
+    max-width: 320px;
+  }
+
+  .my-card {
+    max-width: 320px;
+  }
+}

@@ -17,6 +17,11 @@ import { RegisterPage } from '../pages/register/register';
 import { PipesModule } from '../pipes/pipes.module';
 import { MediaUploaderPage } from '../pages/media-uploader/media-uploader';
 import { Chooser } from '@ionic-native/chooser';
+import { Camera } from '@ionic-native/camera/ngx';
+import { UpdateMediaPage } from '../pages/update-media/update-media';
+import { MyFilesPage } from '../pages/my-files/my-files';
+import { PlayerPage } from '../pages/player/player';
+import { UploadPage } from '../pages/upload/upload';
 
 @NgModule({
   declarations: [
@@ -27,6 +32,10 @@ import { Chooser } from '@ionic-native/chooser';
     LoginRegisterPage,
     ProfilePage,
     MediaUploaderPage,
+    UploadPage,
+    PlayerPage,
+    MyFilesPage,
+    UpdateMediaPage
   ],
   imports: [
     BrowserModule,
@@ -43,6 +52,10 @@ import { Chooser } from '@ionic-native/chooser';
     LoginRegisterPage,
     ProfilePage,
     MediaUploaderPage,
+    UploadPage,
+    PlayerPage,
+    MyFilesPage,
+    UpdateMediaPage
   ],
   providers: [
     StatusBar,

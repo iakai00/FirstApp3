@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { LoadingController, NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
 import { Chooser } from '@ionic-native/chooser';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 /**
  * Generated class for the MediaUploaderPage page.
@@ -82,7 +82,7 @@ export class MediaUploaderPage {
     //fd.append('file', this.file);
 
     fd.append('file', this.myImage);
-    this.mediaProvider.upload(fd).subscribe(resp => {
+    this.mediaProvider.uploadMedia(fd).subscribe(resp => {
 
       // setTimeout 2 secs
       setTimeout(() => {

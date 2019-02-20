@@ -22,3 +22,14 @@ export interface Avatar extends Media {
   tag_id: number;
   tag: string;
 }
+
+export interface UploadResponse {
+  message: string;
+  file_id: number;
+}
+
+export interface Favourite {
+  favourite_id?: number;
+  file_id?: number;
+  user_id?: number;
+}

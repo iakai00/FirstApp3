@@ -1,0 +1,21 @@
+page-update-media {
+
+}
+
+.my-form {
+  margin: 0 auto;
+}
+
+.my-card {
+  margin: 0 auto;
+}
+
+@media (min-width: 767px) {
+  .my-form{
+    max-width: 500px;
+  }
+
+  .my-card {
+    max-width: 500px;
+  }
+}
